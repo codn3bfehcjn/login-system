@@ -28,7 +28,7 @@ app.post("/register", async (req, res) => {
     let hash = await bcrypt.hash(password, 10);
     let newUser = new db({ username, password: hash });
     await newUser.save();
-    res.redirect("/login");
+    res.render("home");
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
@@ -56,7 +56,7 @@ app.post("/login", async (req, res) => {
       return res.status(400).send("Incorrect password");
     }
 
-    res.render("home", { username: loggedUser.username });
+    res.render("home");
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Internal Server Error");
